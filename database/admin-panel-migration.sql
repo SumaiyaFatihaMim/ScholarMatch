@@ -1,0 +1,18 @@
+-- Apply to an existing PostgreSQL ScholarMatch database.
+
+ALTER TABLE users
+  ADD COLUMN IF NOT EXISTS is_admin BOOLEAN NOT NULL DEFAULT FALSE;
+
+CREATE UNIQUE INDEX IF NOT EXISTS users_email_lower_unique ON users (LOWER(email));
+
+CREATE TABLE IF NOT EXISTS user_workspaces (
+  user_id BIGINT NOT NULL PRIMARY KEY REFERENCES users (id) ON DELETE CASCADE,
+  data_json JSONB NOT NULL,
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS platform_catalog (
+  catalog_key VARCHAR(32) PRIMARY KEY,
+  data_json JSONB NOT NULL,
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
