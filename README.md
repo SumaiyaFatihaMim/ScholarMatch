@@ -172,3 +172,4 @@ All main navigation entries now use **real URLs** through `next/link`; route cha
 - Change the nav URL mapping in `components/scholarmatch/routes.ts` and the nav items in `components/scholarmatch/ui.tsx`.
 
 **Note:** This update changes client-side navigation and adds detail pages; it does not add production backend features or Gemini API support.
+hm
